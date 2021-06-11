@@ -1,0 +1,48 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    background-color: red;
+    margin: auto;
+    border: blue solid 1px;
+    align-items: center;
+    margin-top: 30px;
+}
+
+#form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: blue;
+}
+
+#new-book {
+    display: block;
+    margin: auto;
+    margin-top: 5vh;
+}
+
+#submit-button {
+    margin-top: 5vh;
+}
+
+#display {
+    display: flex;
+    flex-wrap: wrap;
+    }
+
+.cards {
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+    flex-grow: 1;
+    align-items: start;
+    border: red solid 1px;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    align-self: center;
+}
