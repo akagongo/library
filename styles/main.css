@@ -1,18 +1,29 @@
+body {
+    background-color: #518EAA;
+}
+
+button {
+    background-color: #51A98A;
+}
+
 .container {
     display: flex;
     flex-direction: column;
-    background-color: red;
     margin: auto;
-    border: blue solid 1px;
     align-items: center;
     margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+header {
+    background-color: #51A98A;
+    margin-top: 0px;
 }
 
 #form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: blue;
 }
 
 #new-book {
@@ -36,11 +47,13 @@
     margin-right: 10px;
     flex-grow: 1;
     align-items: start;
-    border: red solid 1px;
+    background-color: #A95153;
+    border-radius: 5%;
 }
 
 h1 {
     text-align: center;
+    margin-top: 0px;
 }
 
 h2 {

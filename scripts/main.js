@@ -23,7 +23,6 @@ function addBookToLibrary(title, author, pages, read) {
     if (!bookExists(newBook)) {
         library.push(newBook);
     }
-    console.log(library);
 }
 
 function displayBooks () {
@@ -42,7 +41,7 @@ function displayBooks () {
         paraPages = document.createElement("p");
         paraPages.textContent = `Pages: ${library[i].pages}`;
         paraRead = document.createElement("p");
-        paraRead.textContent = `Read: ${library[i].pages}`;
+        paraRead.textContent = `Read: ${library[i].read}`;
         divCard.appendChild(h2Title);
         divCard.appendChild(paraAuthor);
         divCard.appendChild(paraPages);
@@ -51,20 +50,27 @@ function displayBooks () {
         deleteBtn.classList.add("del-buttons");
         deleteBtn.setAttribute("id", `${i}`);
         deleteBtn.textContent = "Delete";
+        let changeBtn = document.createElement("button");
+        changeBtn.classList.add("change-buttons");
+        changeBtn.setAttribute("id", `change-${i}`);
+        changeBtn.textContent = "Change Status";
+        divCard.appendChild(changeBtn);
         divCard.appendChild(deleteBtn);
         display.appendChild(divCard);
     }
 
+    changeBtns = document.querySelectorAll(".change-buttons");
+    changeBtns.forEach(btn => btn.addEventListener("click", changeStatus));
     delBtns = document.querySelectorAll(".del-buttons");
     delBtns.forEach(btn => btn.addEventListener("click", deleteCard));
 }
 
 function createForm() {
-    inputArray = ["title", "author", "pages", "read"]
+    inputArray = ["title", "author", "pages"];
     formContainer.textContent = "";
     const form = document.createElement("form");
     form.setAttribute("id", "form");
-    //make a loop that takes title, author, pages, read and append the inputs and labels to form
+    //make a loop that takes title, author, pages and append the inputs and labels to form
     for (let i = 0; i < inputArray.length; i++) {
         let titleLabel = document.createElement("label");
         let titleInput = document.createElement("input");
@@ -75,6 +81,26 @@ function createForm() {
         form.appendChild(titleLabel);
         form.appendChild(titleInput);
     }
+    
+    let fieldset = document.createElement("fieldset");
+    let legend = document.createElement("legend");
+    legend.textContent = "Have you read the book?:"
+    fieldset.appendChild(legend);
+    
+    statusArray = ["yes", "no"];
+    for (let i = 0; i < statusArray.length; i++) {
+        let readLabel = document.createElement("label")
+        readLabel.setAttribute("for", statusArray[i]);
+        readLabel.textContent = statusArray[i];
+        let readInput = document.createElement("input");
+        readInput.setAttribute("type", "radio");
+        readInput.setAttribute("id", statusArray[i]);
+        readInput.setAttribute("name", "read-status");
+        readInput.setAttribute("value", statusArray[i]);
+        fieldset.appendChild(readLabel);
+        fieldset.appendChild(readInput);
+    }
+    form.appendChild(fieldset);
     submit = document.createElement("button");
     submit.setAttribute("id", "submit-button");
     submit.textContent = "SUBMIT";
@@ -84,19 +110,17 @@ function createForm() {
     formContainer.classList.add("container");
     submitBtn = document.querySelector("#submit-button");
     submitBtn.addEventListener("click", createArray);
-
 }
 
 function createArray() {
     let title = document.querySelector("#title").value;
     let author = document.querySelector("#author").value;
     let pages = document.querySelector("#pages").value;
-    let read = document.querySelector("#read").value;
+    let isRead = document.querySelector("input[name='read-status']:checked").value;
     if (!title) {
         return
     }
-    
-    addBookToLibrary(title, author, pages, read);
+    addBookToLibrary(title, author, pages, isRead);
     formContainer.textContent = "";
     displayBooks();
 }
@@ -107,7 +131,6 @@ function bookExists(book) {
     let pages = library.some((books) => books.pages ===book.pages);
 
     return title && author && pages;
-
 }
 
 function deleteCard(e) {
@@ -117,7 +140,15 @@ function deleteCard(e) {
         library.splice(e.target.id, 1);
     }
     
-    cardToDelete = document.querySelector(`#card-${e.target.id}`);
-    cardToDelete.remove();
-    console.log(library);
+    //cardToDelete = document.querySelector(`#card-${e.target.id}`);
+    //cardToDelete.remove();
+    displayBooks();
+}
+
+function changeStatus() {
+    if (paraRead.textContent.includes("yes")) {
+        paraRead.textContent = "Read: no";
+    } else {
+        paraRead.textContent = "Read: yes";
+    }
 }
