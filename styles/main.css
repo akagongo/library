@@ -1,9 +1,9 @@
 body {
-    background-color: #518EAA;
+    background-color: #FFFFFF;
 }
 
 button {
-    background-color: #51A98A;
+    background-color: #FCA311;
 }
 
 .container {
@@ -16,7 +16,7 @@ button {
 }
 
 header {
-    background-color: #51A98A;
+    background-color: #14213D;
     margin-top: 0px;
 }
 
@@ -47,15 +47,21 @@ header {
     margin-right: 10px;
     flex-grow: 1;
     align-items: start;
-    background-color: #A95153;
+    background-color: #FCA311;
     border-radius: 5%;
 }
 
 h1 {
     text-align: center;
     margin-top: 0px;
+    color: #FFFFFF;
 }
 
 h2 {
     align-self: center;
+}
+
+.del-buttons, .change-buttons {
+    background-color: #14213D;
+    color: #FFFFFF;
 }
